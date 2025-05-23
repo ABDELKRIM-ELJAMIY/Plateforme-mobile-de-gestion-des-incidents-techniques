@@ -35,7 +35,6 @@ export default function SimpleTabBar() {
 
 const styles = {
   container: {
-    
     flexDirection: 'row',
     backgroundColor: '#f8f9fa',
     borderTopWidth: 1,
