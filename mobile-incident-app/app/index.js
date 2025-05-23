@@ -1,3 +1,4 @@
+
 import { Text, View, StyleSheet } from "react-native";
 import Header from "../src/components/Header";
 import '../global.css'
