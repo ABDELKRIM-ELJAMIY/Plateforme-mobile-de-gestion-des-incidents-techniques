@@ -5,7 +5,7 @@ import { View,Text } from 'react-native'
 const Header = () => {
   return (
       <View>
-          <Text>
+          <Text className='text-red-100'>
               test
           </Text>
           
