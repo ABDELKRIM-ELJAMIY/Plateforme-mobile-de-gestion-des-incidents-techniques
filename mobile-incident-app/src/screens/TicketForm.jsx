@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Alert, ScrollView, StyleSheet } from 'react-native';
 import SimpleTabBar from '../components/MyTabBar';
 
-export default function TicketForm() {
+export default function TicketForm({ navigation }) {
   const [form, setForm] = useState({
     name: '',
     email: '',
@@ -80,7 +80,7 @@ export default function TicketForm() {
           <Text style={styles.buttonText}>Submit</Text>
         </TouchableOpacity>
       </ScrollView>
-      <SimpleTabBar /> 
+      <SimpleTabBar navigation={navigation} />
     </View>
   );
 }
