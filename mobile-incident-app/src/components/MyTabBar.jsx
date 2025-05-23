@@ -1,70 +1,58 @@
-import { View, Platform } from 'react-native';
-import { useLinkBuilder, useTheme } from '@react-navigation/native';
-import { Text, PlatformPressable } from '@react-navigation/elements';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import HomeScreen from '../screens/HomeScreen';
-import ProfileScreen from '../screens/ProfileScreen';
+import React from 'react';
+import { View, Text, TouchableOpacity } from 'react-native';
 
-function MyTabBar({ state, descriptors, navigation }) {
-  const { colors } = useTheme();
-  const { buildHref } = useLinkBuilder();
+export default function SimpleTabBar() {
+  const handleTabPress = (tabName) => {
+    // Add your navigation logic here
+    console.log(`${tabName} tab pressed`);
+  };
 
   return (
-    <View style={{ flexDirection: 'row' }}>
-      {state.routes.map((route, index) => {
-        const { options } = descriptors[route.key];
-        const label =
-          options.tabBarLabel !== undefined
-            ? options.tabBarLabel
-            : options.title !== undefined
-              ? options.title
-              : route.name;
-
-        const isFocused = state.index === index;
-
-        const onPress = () => {
-          const event = navigation.emit({
-            type: 'tabPress',
-            target: route.key,
-            canPreventDefault: true,
-          });
-
-          if (!isFocused && !event.defaultPrevented) {
-            navigation.navigate(route.name, route.params);
-          }
-        };
-
-        const onLongPress = () => {
-          navigation.emit({
-            type: 'tabLongPress',
-            target: route.key,
-          });
-        };
-
-        return (
-          <PlatformPressable
-            href={buildHref(route.name, route.params)}
-            accessibilityState={isFocused ? { selected: true } : {}}
-            accessibilityLabel={options.tabBarAccessibilityLabel}
-            testID={options.tabBarButtonTestID}
-            onPress={onPress}
-            onLongPress={onLongPress}
-            style={{ flex: 1 }}
-          >
-            <Text style={{ color: isFocused ? colors.primary : colors.text }}>
-              {label}
-            </Text>
-          </PlatformPressable>
-        );
-      })}
+    <View style={styles.container}>
+      <TouchableOpacity 
+        style={styles.tab} 
+        onPress={() => handleTabPress('Home')}
+      >
+        <Text style={styles.tabText}>Home</Text>
+      </TouchableOpacity>
+      
+      <TouchableOpacity 
+        style={styles.tab} 
+        onPress={() => handleTabPress('Profile')}
+      >
+        <Text style={styles.tabText}>Profile</Text>
+      </TouchableOpacity>
+      
+      <TouchableOpacity 
+        style={styles.tab} 
+        onPress={() => handleTabPress('Tickets')}
+      >
+        <Text style={[styles.tabText, styles.activeTab]}>Tickets</Text>
+      </TouchableOpacity>
     </View>
   );
 }
 
-const MyTabs = createBottomTabNavigator({
-  tabBar: (props) => <MyTabBar {...props} />,
-  screens: {
-    Home: HomeScreen,
-    Profile: ProfileScreen,
+const styles = {
+  container: {
+    
+    flexDirection: 'row',
+    backgroundColor: '#f8f9fa',
+    borderTopWidth: 1,
+    borderTopColor: '#e9ecef',
+    paddingVertical: 10,
   },
-});
+  tab: {
+    flex: 1,
+    alignItems: 'center',
+    paddingVertical: 8,
+  },
+  tabText: {
+    fontSize: 16,
+    color: '#6c757d',
+  },
+  activeTab: {
+    color: '#007bff',
+    fontWeight: 'bold',
+  },
+};
