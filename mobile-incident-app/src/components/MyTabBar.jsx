@@ -1,33 +1,26 @@
+// MyTabBar.jsx
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 
-export default function SimpleTabBar() {
-  const handleTabPress = (tabName) => {
-    // Add your navigation logic here
-    console.log(`${tabName} tab pressed`);
+export default function SimpleTabBar({ navigation }) { // Add navigation prop
+  const handleTabPress = (screenName) => {
+    navigation.navigate(screenName); // Use navigation prop
   };
 
   return (
     <View style={styles.container}>
       <TouchableOpacity 
         style={styles.tab} 
-        onPress={() => handleTabPress('Home')}
+        onPress={() => handleTabPress('TicketCard')}
       >
-        <Text style={styles.tabText}>Home</Text>
+        <Text style={styles.tabText}>Tickets</Text>
       </TouchableOpacity>
       
       <TouchableOpacity 
         style={styles.tab} 
-        onPress={() => handleTabPress('Profile')}
+        onPress={() => handleTabPress('TicketForm')}
       >
-        <Text style={styles.tabText}>Profile</Text>
-      </TouchableOpacity>
-      
-      <TouchableOpacity 
-        style={styles.tab} 
-        onPress={() => handleTabPress('Tickets')}
-      >
-        <Text style={[styles.tabText, styles.activeTab]}>Tickets</Text>
+        <Text style={styles.tabText}>New Ticket</Text>
       </TouchableOpacity>
     </View>
   );

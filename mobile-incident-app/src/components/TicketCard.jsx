@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import SimpleTabBar from '../components/MyTabBar'
 
-const TicketCard = () => {
+const TicketCard = ({ navigation }) => {
   return (
     <>
     <View style={styles.container}>
@@ -39,7 +39,7 @@ const TicketCard = () => {
           </Text>
         </View>
       </View>
-      <SimpleTabBar/>
+      <SimpleTabBar navigation={navigation} />
     </View>
     </>
     
